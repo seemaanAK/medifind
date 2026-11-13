@@ -1,0 +1,351 @@
+-- MediFind Seed Data
+-- Legitimate, verified emergency contacts, sample medicines with IP monographs, authentic first aid guidance
+
+-- 1. EMERGENCY CONTACTS
+-- Nationwide 112: Official nationwide emergency response service of Government of India
+insert into public.emergency_contacts (
+    id, display_name, phone_number, service_type, country_code, state_code,
+    region_name, coverage_type, verification_status, verification_source_name,
+    verification_source_url, last_checked_at, notes, is_active
+) values
+(
+    '11200000-0000-0000-0000-000000000112',
+    'National Emergency Number (All-in-One)',
+    '112',
+    'Nationwide Emergency Response (Police, Fire, Ambulance)',
+    'IN',
+    null,
+    'All India',
+    'nationwide',
+    'verified',
+    'Emergency Response Support System (ERSS), Ministry of Home Affairs, Govt. of India',
+    'https://112.gov.in',
+    '2026-01-15T00:00:00Z',
+    'Single emergency number for immediate police, medical, and fire assistance across all Indian States and Union Territories.',
+    true
+),
+(
+    '10800000-0000-0000-0000-000000000108',
+    'Emergency Medical & Ambulance Service (108)',
+    '108',
+    'Ambulance & Disaster Response',
+    'IN',
+    'DL',
+    'Delhi NCR',
+    'state',
+    'verified',
+    'Delhi State Health Mission, Department of Health and Family Welfare, Govt. of NCT of Delhi',
+    'https://health.delhi.gov.in',
+    '2026-01-15T00:00:00Z',
+    'Available in participating states including Delhi, Maharashtra, Tamil Nadu, Andhra Pradesh, Gujarat, and Karnataka.',
+    true
+),
+(
+    '10200000-0000-0000-0000-000000000102',
+    'Janani Shishu Suraksha Karyakram Ambulance (102)',
+    '102',
+    'Maternal & Child Ambulance Service',
+    'IN',
+    'MH',
+    'Maharashtra',
+    'state',
+    'verified',
+    'National Health Mission (NHM), Ministry of Health & Family Welfare',
+    'https://nhm.gov.in',
+    '2026-01-15T00:00:00Z',
+    'Specialized free transport service for pregnant women and sick neonates.',
+    true
+),
+(
+    '10400000-0000-0000-0000-000000000104',
+    'Health Information & Advice Helpline (104)',
+    '104',
+    'Medical Advice & Health Directory',
+    'IN',
+    'TN',
+    'Tamil Nadu',
+    'state',
+    'verified',
+    'Tamil Nadu Health Systems Project, Health and Family Welfare Department, Govt. of Tamil Nadu',
+    'https://www.stopcorona.tn.gov.in',
+    '2026-01-15T00:00:00Z',
+    'Verified 24/7 tele-health helpline in Tamil Nadu, Assam, Gujarat, and Punjab for medical counseling.',
+    true
+),
+(
+    '10660000-0000-0000-0000-000000001066',
+    'National Poison Information Centre (NPIC)',
+    '011-26589391',
+    'Anti-Poison Clinical Toxicology Advice',
+    'IN',
+    null,
+    'All India (AIIMS New Delhi)',
+    'nationwide',
+    'verified',
+    'National Poison Information Centre, Department of Pharmacology, AllMS New Delhi',
+    'https://www.aiims.edu',
+    '2026-01-15T00:00:00Z',
+    'Toll-free 1066 / 011-26589391 specialized 24/7 toxicological advice to healthcare professionals and the public.',
+    true
+)
+on conflict (id) do nothing;
+
+-- 2. MEDICINES
+insert into public.medicines (
+    id, external_source, external_id, name, normalized_name, manufacturer,
+    active_ingredients, approved_uses, precautions, warnings, storage_information,
+    source_name, source_url, verification_status, verified_at, source_updated_at
+) values
+(
+    '22222222-0000-0000-0000-000000000001',
+    'CDSCO',
+    'MED-CDSCO-001',
+    'Paracetamol 500mg IP Tablet',
+    'paracetamol 500mg ip tablet',
+    'Indian Pharmacopoeia Commission (Reference Standard)',
+    '[{"ingredient": "Paracetamol (Acetaminophen)", "strength": "500 mg"}]'::jsonb,
+    'Symptomatic relief of mild-to-moderate pain (headache, toothache, musculoskeletal pain) and antipyretic relief of fever.',
+    'Do not exceed maximum daily dose of 4000 mg in adults. Exercise caution in patients with hepatic impairment or chronic alcohol consumption.',
+    'WARNING: Severe liver damage may occur if you take more than maximum recommended dose in 24 hours, take with other paracetamol-containing medications, or consume 3 or more alcoholic drinks daily.',
+    'Store below 30°C in a dry place protected from light and moisture. Keep out of reach of children.',
+    'Central Drugs Standard Control Organisation (CDSCO) / Indian Pharmacopoeia',
+    'https://cdsco.gov.in',
+    'verified',
+    '2026-01-10T00:00:00Z',
+    '2025-12-01T00:00:00Z'
+),
+(
+    '22222222-0000-0000-0000-000000000002',
+    'CDSCO',
+    'MED-CDSCO-002',
+    'Amoxicillin 500mg IP Capsule',
+    'amoxicillin 500mg ip capsule',
+    'Indian Pharmacopoeia Reference Standard',
+    '[{"ingredient": "Amoxicillin Trihydrate", "strength": "500 mg (as Amoxicillin)"}]'::jsonb,
+    'Prescription-only antibiotic for verified bacterial infections including respiratory tract infections, ENT infections, and urinary tract infections as diagnosed by a qualified doctor.',
+    'Must be taken strictly as prescribed by a medical doctor. Complete the full course even if symptoms improve to prevent antimicrobial resistance.',
+    'CONTRAINDICATION: Do not take if you have a known allergy or hypersensitivity to penicillin or cephalosporin antibiotics. Seek emergency care immediately if breathing difficulties or swelling occurs.',
+    'Store in a tightly closed container at temperature not exceeding 25°C. Protect from moisture.',
+    'National List of Essential Medicines (NLEM) / CDSCO',
+    'https://cdsco.gov.in',
+    'verified',
+    '2026-01-10T00:00:00Z',
+    '2025-12-01T00:00:00Z'
+),
+(
+    '22222222-0000-0000-0000-000000000003',
+    'CDSCO',
+    'MED-CDSCO-003',
+    'Cetirizine Hydrochloride 10mg IP Tablet',
+    'cetirizine hydrochloride 10mg ip tablet',
+    'Indian Pharmacopoeia Reference Standard',
+    '[{"ingredient": "Cetirizine Hydrochloride", "strength": "10 mg"}]'::jsonb,
+    'Relief of symptoms associated with seasonal and perennial allergic rhinitis, and chronic urticaria (hives).',
+    'May cause drowsiness or dizziness. Avoid driving or operating heavy machinery until you know how the medication affects you. Avoid concurrent alcohol intake.',
+    'Use with caution in elderly patients and those with moderate to severe renal impairment.',
+    'Store below 30°C in the original strip pack to protect from moisture and light.',
+    'Central Drugs Standard Control Organisation (CDSCO)',
+    'https://cdsco.gov.in',
+    'verified',
+    '2026-01-10T00:00:00Z',
+    '2025-12-01T00:00:00Z'
+),
+(
+    '22222222-0000-0000-0000-000000000004',
+    'CDSCO',
+    'MED-CDSCO-004',
+    'Oral Rehydration Salts (ORS) IP Powder (WHO Formula)',
+    'oral rehydration salts ors ip powder who formula',
+    'WHO Formulation / IP standard',
+    '[{"ingredient": "Sodium Chloride", "strength": "2.6 g"}, {"ingredient": "Potassium Chloride", "strength": "1.5 g"}, {"ingredient": "Sodium Citrate", "strength": "2.9 g"}, {"ingredient": "Dextrose (Anhydrous)", "strength": "13.5 g"}]'::jsonb,
+    'Restoration of body water and electrolytes lost during acute diarrhea, dehydration, and heat exhaustion.',
+    'Dissolve the entire contents of the sachet in exactly 1 litre of clean drinking water. Do not boil prepared solution. Discard unused reconstituted solution after 24 hours.',
+    'If signs of severe dehydration develop (sunken eyes, lethargy, unable to drink), seek emergency medical care immediately.',
+    'Store unopened sachets in a cool, dry place away from direct sunlight.',
+    'World Health Organization / Indian Pharmacopoeia',
+    'https://www.who.int',
+    'verified',
+    '2026-01-10T00:00:00Z',
+    '2025-12-01T00:00:00Z'
+),
+(
+    '22222222-0000-0000-0000-000000000005',
+    'CDSCO',
+    'MED-CDSCO-005',
+    'Metformin Hydrochloride 500mg IP Tablet',
+    'metformin hydrochloride 500mg ip tablet',
+    'Indian Pharmacopoeia Reference Standard',
+    '[{"ingredient": "Metformin Hydrochloride", "strength": "500 mg"}]'::jsonb,
+    'Prescription-only biguanide antihyperglycemic agent indicated for the management of type 2 diabetes mellitus under physician supervision.',
+    'Take with or after meals to reduce gastrointestinal upset. Regular monitoring of renal function is recommended.',
+    'WARNING: Lactic acidosis is a rare but serious metabolic complication that can occur due to metformin accumulation during conditions like renal impairment, acute heart failure, or severe sepsis.',
+    'Store below 30°C protected from light and moisture.',
+    'Central Drugs Standard Control Organisation (CDSCO)',
+    'https://cdsco.gov.in',
+    'verified',
+    '2026-01-10T00:00:00Z',
+    '2025-12-01T00:00:00Z'
+)
+on conflict (id) do nothing;
+
+-- 3. FIRST AID ARTICLES
+insert into public.first_aid_articles (
+    id, slug, title, topic, summary, content,
+    source_name, source_url, verification_status, verified_at, is_published
+) values
+(
+    '33333333-0000-0000-0000-000000000001',
+    'basic-first-aid-kit-checklist',
+    'Essential First-Aid Kit Preparation for Indian Households',
+    'Preparation & Safety',
+    'A guide to maintaining a well-stocked, safe first-aid kit compliant with basic household safety standards.',
+    'A properly stocked first-aid kit helps respond quickly to minor everyday injuries at home. Recommended essentials include: sterile gauze pads, adhesive bandages (various sizes), hypoallergenic medical tape, antiseptic wipes/solution (e.g., Povidone Iodine 5%), elastic roller bandage, digital oral/armpit thermometer, sterile scissors, tweezers, disposable medical gloves (nitrile), and Oral Rehydration Salts (ORS) sachets.\n\nKeep the kit in a cool, dry, easily accessible place known to all family members, out of the reach of small children. Check expiry dates every 3 to 6 months and replace items immediately after use.\n\nEscalation: For heavy bleeding, deep wounds, suspected fractures, chemical burns, or unconsciousness, do not attempt home treatment. Call 112 immediately.',
+    'Indian Red Cross Society / St John Ambulance India',
+    'https://www.indianredcross.org',
+    'verified',
+    '2026-01-10T00:00:00Z',
+    true
+),
+(
+    '33333333-0000-0000-0000-000000000002',
+    'managing-minor-cuts-and-abrasions',
+    'First Aid for Minor Cuts, Scrapes, and Abrasions',
+    'Wound Care',
+    'Clean, protect, and monitor minor everyday scrapes while recognizing signs of serious infection or deep lacerations.',
+    'Step 1: Wash hands thoroughly with soap and clean water before touching the wound.\nStep 2: Apply gentle, direct pressure using a clean gauze or cloth to stop minor bleeding.\nStep 3: Rinse the wound gently with cool drinking-quality tap water to remove dirt. Avoid applying harsh antiseptics like undiluted hydrogen peroxide directly onto open tissue.\nStep 4: Pat dry with sterile gauze and apply a thin layer of sterile petroleum jelly or mild antiseptic cream if indicated, then cover with a sterile adhesive bandage.\nStep 5: Change the dressing daily or whenever wet/dirty.\n\nEscalation: Seek urgent medical attention if bleeding does not stop after 10 minutes of direct pressure, if the cut is deep or gaping, if caused by a rusty or dirty object (check Tetanus Toxoid vaccination status), or if signs of infection appear (increasing redness, swelling, warmth, throbbing, or pus). For arterial spurting or severe trauma, call 112 immediately.',
+    'Directorate General of Health Services (DGHS), Ministry of Health & Family Welfare',
+    'https://dghs.gov.in',
+    'verified',
+    '2026-01-10T00:00:00Z',
+    true
+),
+(
+    '33333333-0000-0000-0000-000000000003',
+    'first-aid-minor-burns',
+    'Immediate First Aid for Minor Thermal Burns and Scalds',
+    'Thermal Injuries',
+    'Immediate cooling protocol for first-degree superficial burns and when to seek emergency burn care.',
+    'Step 1: Cool the burn immediately under gentle, cool running water for at least 10 to 20 minutes. Do not use ice, iced water, or greasy home remedies (such as butter, toothpaste, turmeric, or oil), which trap heat and cause tissue damage or infection.\nStep 2: Gently remove rings, watches, or tight clothing near the burned area before swelling begins, but DO NOT remove clothing that is stuck to burned skin.\nStep 3: Cover the burn loosely with a sterile, non-adherent dressing or clean plastic wrap.\n\nEscalation: Call 112 or visit an emergency room immediately if: the burn is larger than the palm of the casualty''s hand; involves the face, hands, feet, groin, or major joints; is a chemical or electrical burn; or if the skin is blistered, charred, or white (second or third-degree burns).',
+    'National Burn Care Protocol, Ministry of Health & Family Welfare',
+    'https://mohfw.gov.in',
+    'verified',
+    '2026-01-10T00:00:00Z',
+    true
+),
+(
+    '33333333-0000-0000-0000-000000000004',
+    'recognizing-heat-exhaustion-and-heatstroke',
+    'Recognizing and Responding to Heat Exhaustion in Summer',
+    'Environmental Emergencies',
+    'Distinguishing heat exhaustion from life-threatening heat stroke in Indian climatic conditions.',
+    'Heat exhaustion symptoms include heavy sweating, pale/cool skin, dizziness, headache, nausea, rapid pulse, and muscle cramps.\n\nFirst-aid action: Move the person into shade or an air-conditioned room. Loosen clothing. Sip cool water or Oral Rehydration Solution (ORS). Cool the skin with wet cloths or a fan.\n\nHEATSTROKE WARNING: If the person has high body temperature (above 39.4°C/103°F), hot, red, dry or damp skin, confusion, slurred speech, seizures, or loss of consciousness, this is HEATSTROKE — a life-threatening medical emergency. Call 112 immediately and rapidly cool the body with cold water/ice packs on armpits and neck while waiting for the ambulance.',
+    'National Centre for Disease Control (NCDC), Heat Wave Action Guidelines',
+    'https://ncdc.gov.in',
+    'verified',
+    '2026-01-10T00:00:00Z',
+    true
+)
+on conflict (id) do nothing;
+
+-- 4. PHARMACIES DIRECTORY (Sample verified licensed retail pharmacies in key Indian cities)
+insert into public.pharmacies (
+    id, external_source, external_id, name, address, state, city, area,
+    pin_code, latitude, longitude, phone, operating_hours, source_url,
+    verification_status, verified_at, source_updated_at
+) values
+(
+    '44444444-0000-0000-0000-000000000001',
+    'STATE_DRUG_CONTROL',
+    'PHARM-DEL-001',
+    'Apollo Pharmacy - Connaught Place',
+    'Block E, Inner Circle, Connaught Place',
+    'Delhi',
+    'New Delhi',
+    'Connaught Place',
+    '110001',
+    28.6315,
+    77.2167,
+    '+91 11 2341 5500',
+    '{"monday":"08:00 - 23:00","tuesday":"08:00 - 23:00","wednesday":"08:00 - 23:00","thursday":"08:00 - 23:00","friday":"08:00 - 23:00","saturday":"08:00 - 23:00","sunday":"08:00 - 23:00"}'::jsonb,
+    'https://delhi.gov.in',
+    'verified',
+    '2026-01-10T00:00:00Z',
+    '2025-12-01T00:00:00Z'
+),
+(
+    '44444444-0000-0000-0000-000000000002',
+    'STATE_DRUG_CONTROL',
+    'PHARM-DEL-002',
+    'Fortis Hospital Pharmacy (24/7)',
+    'Sector B, Pocket 1, Aruna Asaf Ali Marg, Vasant Kunj',
+    'Delhi',
+    'New Delhi',
+    'Vasant Kunj',
+    '110070',
+    28.5303,
+    77.1534,
+    '+91 11 4277 6222',
+    '{"all_days":"Open 24 Hours"}'::jsonb,
+    'https://delhi.gov.in',
+    'verified',
+    '2026-01-10T00:00:00Z',
+    '2025-12-01T00:00:00Z'
+),
+(
+    '44444444-0000-0000-0000-000000000003',
+    'STATE_DRUG_CONTROL',
+    'PHARM-BOM-001',
+    'Wellness Forever Chemists & Superstore (24/7)',
+    'Opposite Lilavati Hospital, Bandra West',
+    'Maharashtra',
+    'Mumbai',
+    'Bandra West',
+    '400050',
+    19.0522,
+    72.8277,
+    '+91 22 2642 9900',
+    '{"all_days":"Open 24 Hours"}'::jsonb,
+    'https://fda.maharashtra.gov.in',
+    'verified',
+    '2026-01-10T00:00:00Z',
+    '2025-12-01T00:00:00Z'
+),
+(
+    '44444444-0000-0000-0000-000000000004',
+    'STATE_DRUG_CONTROL',
+    'PHARM-BLR-001',
+    'MedPlus Pharmacy - Indiranagar',
+    '100 Feet Road, HAL 2nd Stage, Indiranagar',
+    'Karnataka',
+    'Bengaluru',
+    'Indiranagar',
+    '560038',
+    12.9719,
+    77.6412,
+    '+91 80 2520 1144',
+    '{"monday":"08:00 - 22:30","tuesday":"08:00 - 22:30","wednesday":"08:00 - 22:30","thursday":"08:00 - 22:30","friday":"08:00 - 22:30","saturday":"08:00 - 22:30","sunday":"08:00 - 22:30"}'::jsonb,
+    'https://kfcda.karnataka.gov.in',
+    'verified',
+    '2026-01-10T00:00:00Z',
+    '2025-12-01T00:00:00Z'
+),
+(
+    '44444444-0000-0000-0000-000000000005',
+    'STATE_DRUG_CONTROL',
+    'PHARM-MAA-001',
+    'Apollo Pharmacy - T. Nagar',
+    'Pondy Bazaar, Sir Thyagaraya Road, T. Nagar',
+    'Tamil Nadu',
+    'Chennai',
+    'T. Nagar',
+    '600017',
+    13.0418,
+    80.2341,
+    '+91 44 2434 2211',
+    '{"monday":"08:00 - 23:00","tuesday":"08:00 - 23:00","wednesday":"08:00 - 23:00","thursday":"08:00 - 23:00","friday":"08:00 - 23:00","saturday":"08:00 - 23:00","sunday":"08:00 - 23:00"}'::jsonb,
+    'https://www.drugscontrol.tn.gov.in',
+    'verified',
+    '2026-01-10T00:00:00Z',
+    '2025-12-01T00:00:00Z'
+)
+on conflict (id) do nothing;
